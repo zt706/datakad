@@ -1284,6 +1284,26 @@ public class OracleUtil {
 		double[] yArr18 = new double[24];
 		double[] yArr19 = new double[24];
 		
+		double[] y2Arr = new double[24];
+	    double[] y2Arr2 = new double[24];
+	    double[] y2Arr3 = new double[24];
+	    double[] y2Arr4 = new double[24];
+	    double[] y2Arr6 = new double[24];
+	    double[] y2Arr5 = new double[24];
+	    double[] y2Arr7 = new double[24];
+	    double[] y2Arr8 = new double[24];
+	    double[] y2Arr9 = new double[24];
+	    double[] y2Arr10 = new double[24];
+	    double[] y2Arr11 = new double[24];
+	    double[] y2Arr12 = new double[24];
+	    double[] y2Arr13 = new double[24];
+	    double[] y2Arr14 = new double[24];
+	    double[] y2Arr15 = new double[24];
+	    double[] y2Arr16 = new double[24];
+	    double[] y2Arr17 = new double[24];
+	    double[] y2Arr18 = new double[24];
+	    double[] y2Arr19 = new double[24];
+		
 		float f1 = 0.0f;
 		float f2 = 0.0f;
 		float f3 = 0.0f;
@@ -1304,6 +1324,26 @@ public class OracleUtil {
 		float f18= 0.0f;
 		float f19= 0.0f;
 		
+		float f21 = 0.0f;
+	    float f22 = 0.0f;
+	    float f23 = 0.0f;
+	    float f24 = 0.0f;
+	    float f25 = 0.0f;
+	    float f26 = 0.0f;
+	    float f27 = 0.0f;
+	    float f28 = 0.0f;
+	    float f29 = 0.0f;
+	    float f210 = 0.0f;
+	    float f211= 0.0f;
+	    float f212= 0.0f;
+	    float f213= 0.0f;
+	    float f214= 0.0f;
+	    float f215= 0.0f;
+	    float f216= 0.0f;
+	    float f217= 0.0f;
+	    float f218= 0.0f;
+	    float f219= 0.0f;
+		
 		float y1= 0.0f;
 		float y2= 0.0f;
 		float y3= 0.0f;
@@ -1313,6 +1353,16 @@ public class OracleUtil {
 		float y7= 0.0f;
 		float y8= 0.0f;
 		float y9= 0.0f;
+		
+		float y21= 0.0f;
+	    float y22= 0.0f;
+	    float y23= 0.0f;
+	    float y24= 0.0f;
+	    float y25= 0.0f;
+	    float y26= 0.0f;
+	    float y27= 0.0f;
+	    float y28= 0.0f;
+	    float y29= 0.0f;
 		
 		int[] xArr = new int[24];
 		int[] xArr2 = new int[24];
@@ -1340,10 +1390,31 @@ public class OracleUtil {
 			yArr17[i] = 0;
 			yArr18[i] = 0;
 			yArr19[i] = 0;
+			
+			y2Arr[i] = 0;
+	        y2Arr2[i] = 0;
+	        y2Arr3[i] = 0;
+	        y2Arr4[i] = 0;
+	        y2Arr6[i] = 0;
+	        y2Arr5[i] = 0;
+	        y2Arr7[i] = 0;
+	        y2Arr8[i] = 0;
+	        y2Arr9[i] = 0;
+	        y2Arr10[i] = 0;
+	        y2Arr11[i] = 0;
+	        y2Arr12[i] = 0;
+	        y2Arr13[i] = 0;   
+	        y2Arr14[i] = 0; 
+	        y2Arr15[i] = 0;
+	        y2Arr16[i] = 0;
+	        y2Arr17[i] = 0;
+	        y2Arr18[i] = 0;
+	        y2Arr19[i] = 0;
 		}
 
 		// Connection connection =  createConnection();
 		
+		/////////////////// 4 status begin ////////////////
 		// 全司
 		String cache_key = getCacheKey("quansi");
 		KadSalse kadsaleObj = getKadSalseObj(cache_key);
@@ -1471,70 +1542,138 @@ public class OracleUtil {
 		// 昨日曲线
 		yArr19 = kadsaleObj.getyestodayEveryHour_4();
 		
-/*
-		// 今日累计-全司
-		f1 = getTodayToatal(connection, "", yArr);
-		// 昨日同期累计-全司
-		 y1 = getYesTheTimeTotal(connection, "");
-		// 昨日累计-全司
-		 f2 = getYestodayToatal(connection, "", yArr2);
-		 
-		// 今日累计-天猫
-		f4 = getTodayToatal(connection, "4", yArr4);
-		// 昨日同期累计-天猫
-		y2 = getYesTheTimeTotal(connection, "4");
-		// 昨日累计-天猫
-		f5 = getYestodayToatal(connection, "4", yArr6);
+		///////////// 4 status end //////////////////
 		
-		// 今日累计-官网
-		f6 = getTodayToatal(connection, "1,12", yArr5);
-		// 昨日同期累计-官网
-		y3 = getYesTheTimeTotal(connection, "1,12");
-		// 昨日累计-官网
-		f7 = getYestodayToatal(connection, "1,12", yArr7);
+		//////////// 6 status begin ////////////////
+		// 全司
+		cache_key = getCacheKey("quansi");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f21 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y21 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f22 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr2 = kadsaleObj.getyestodayEveryHour_6();
 		
-		// 今日累计-wap
-		f8 = getTodayToatal(connection, "13", yArr8);
-		// 昨日同期累计-wap
-		y4 = getYesTheTimeTotal(connection, "13");
-		// 昨日累计-wap
-		f9 = getYestodayToatal(connection, "13", yArr9);
+		// 天猫
+		cache_key = getCacheKey("tianmao");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f24 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y22 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f25 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr4 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr6 = kadsaleObj.getyestodayEveryHour_6();
 		
-		// 今日累计-Android
-		f10 = getTodayToatal(connection, "14", yArr10);
-		// 昨日同期累计-Android
-		y5 = getYesTheTimeTotal(connection, "14");
-		// 昨日累计-Android
-		f11 = getYestodayToatal(connection, "14", yArr11);
-		  
-		// 今日累计-京东
-		f12 = getTodayToatal(connection, "16", yArr12);
-		// 昨日同期累计-京东
-		y6 = getYesTheTimeTotal(connection, "16");
-		// 昨日累计-京东
-		f13 = getYestodayToatal(connection, "16", yArr13);
-		  
-		// 今日累计-IOS
-		f14 = getTodayToatal(connection, "15", yArr14);
-		// 昨日同期累计-IOS
-		y7 = getYesTheTimeTotal(connection, "15");
-		// 昨日累计-IOS
-		f15 = getYestodayToatal(connection, "15", yArr15);
+		// 官网
+		cache_key = getCacheKey("guanwang");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f26 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y23 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f27 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr5 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr7 = kadsaleObj.getyestodayEveryHour_6();
 		
-		// 今日累计-自建
-		f16 = getTodayToatal(connection, "1,2,12,13,14,15", yArr16);
-		// 昨日同期累计-自建
-		y8 = getYesTheTimeTotal(connection, "1,2,12,13,14,15");
-		// 昨日累计-自建
-		f17 = getYestodayToatal(connection, "1,2,12,13,14,15", yArr17);
+		// wap
+		cache_key = getCacheKey("wap");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f28 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y24 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f29 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr8 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr9 = kadsaleObj.getyestodayEveryHour_6();
 		
-		// 今日累计-微商
-		f18 = getTodayToatal(connection, "21", yArr18);
-		// 昨日同期累计-微商
-		y9 = getYesTheTimeTotal(connection, "21");
-		// 昨日累计-微商
-		f19 = getYestodayToatal(connection, "21", yArr19);
-*/		
+		// Android
+		cache_key = getCacheKey("android");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f210 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y25 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f211 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr10 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr11 = kadsaleObj.getyestodayEveryHour_6();
+		
+		// 京东
+		cache_key = getCacheKey("jingdong");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f212 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y26 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f213 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr12 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr13 = kadsaleObj.getyestodayEveryHour_6();
+		
+		// ios
+		cache_key = getCacheKey("ios");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f214 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y27 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f215 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr14 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr15 = kadsaleObj.getyestodayEveryHour_6();
+		
+		// 自建
+		cache_key = getCacheKey("zijian");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f216 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y28 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f217 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr16 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr17 = kadsaleObj.getyestodayEveryHour_6();
+		
+		// 微商城
+		cache_key = getCacheKey("weishangcheng");
+		kadsaleObj = getKadSalseObj(cache_key);
+		// 今日累计
+		f218 = (float)kadsaleObj.gettodayTotal_6();
+		// 昨日同期累计
+		y29 = (float)kadsaleObj.getyestodaySameTime_6();
+		// 昨日累计
+		f219 = (float)kadsaleObj.getyestodayTotal_6();
+		// 今日曲线
+		y2Arr18 = kadsaleObj.gettodayEveryHour_6();
+		// 昨日曲线
+		y2Arr19 = kadsaleObj.getyestodayEveryHour_6();
+		/////////// 6 status end ///////////////////
+		
+		
+		
 		DecimalFormat f =new DecimalFormat(",###");
 		String sf1 = f.format(f1);
 		String sf2 = f.format(f2);
@@ -1556,6 +1695,26 @@ public class OracleUtil {
 		String sf18 = f.format(f18);
 		String sf19 = f.format(f19);
 		
+		String sf21 = f.format(f21);
+	    String sf22 = f.format(f22);
+	    //String sf1 = f.format(f1);
+	    String sf24 = f.format(f24);
+	    String sf25 = f.format(f25);
+	    String sf26 = f.format(f26);
+	    String sf27 = f.format(f27);
+	    String sf28 = f.format(f28);
+	    String sf29 = f.format(f29);
+	    String sf210 = f.format(f210);
+	    String sf211 = f.format(f211);
+	    String sf212 = f.format(f212);
+	    String sf213 = f.format(f213);
+	    String sf214 = f.format(f214);
+	    String sf215 = f.format(f215);
+	    String sf216 = f.format(f216);
+	    String sf217 = f.format(f217);
+	    String sf218 = f.format(f218);
+	    String sf219 = f.format(f219);
+		
 		String sy1 = f.format(y1);
 		String sy2 = f.format(y2);
 		String sy3 = f.format(y3);
@@ -1565,6 +1724,16 @@ public class OracleUtil {
 		String sy7 = f.format(y7);
 		String sy8 = f.format(y8);
 		String sy9 = f.format(y9);
+		
+		String sy21 = f.format(y21);
+	    String sy22 = f.format(y22);
+	    String sy23 = f.format(y23);
+	    String sy24 = f.format(y24);
+	    String sy25 = f.format(y25);
+	    String sy26 = f.format(y26);
+	    String sy27 = f.format(y27);
+	    String sy28 = f.format(y28);
+	    String sy29 = f.format(y29);
 		
 		map1.put("time",xArr );
 		map1.put("time2",xArr2 );
@@ -1618,8 +1787,62 @@ public class OracleUtil {
 		map1.put("y7", sy7);
 		map1.put("y8", sy8);
 		map1.put("y9", sy9);
-		  
+		
+		map2.put("time",xArr );
+		map2.put("time2",xArr2 );
+		
+		map2.put("count",y2Arr);
+		map2.put("count2",y2Arr2);
+		map2.put("count3",y2Arr3);
+		map2.put("count4",y2Arr4);
+		map2.put("count5",y2Arr5);
+		map2.put("count6",y2Arr6);
+		map2.put("count7",y2Arr7);
+		map2.put("count8",y2Arr8);
+		map2.put("count9",y2Arr9);
+		map2.put("count10",y2Arr10);
+		map2.put("count11",y2Arr11);
+		map2.put("count12",y2Arr12);
+		map2.put("count13",y2Arr13);
+		map2.put("count14",y2Arr14);
+		map2.put("count15",y2Arr15);
+		map2.put("count16",y2Arr16);
+		map2.put("count17",y2Arr17);
+		map2.put("count18",y2Arr18);
+		map2.put("count19",y2Arr19);
+		
+		map2.put("f1", sf21);
+		map2.put("f2", sf22);
+		//map.put("f3", f3);
+		map2.put("f4", sf24);
+		map2.put("f5", sf25);
+		map2.put("f6", sf26);
+		map2.put("f7", sf27);
+		map2.put("f8", sf28);
+		map2.put("f9", sf29);   
+		map2.put("f10", sf210);
+		map2.put("f11", sf211);
+		map2.put("f12", sf212);
+		map2.put("f13", sf213);
+		map2.put("f14", sf214);
+		map2.put("f15", sf215);
+		map2.put("f16", sf216);
+		map2.put("f17", sf217);
+		map2.put("f18", sf218);
+		map2.put("f19", sf219);
+		
+		map2.put("y1", sy21);
+		map2.put("y2", sy22);
+		map2.put("y3", sy23);
+		map2.put("y4", sy24);
+		map2.put("y5", sy25);
+		map2.put("y6", sy26);
+		map2.put("y7", sy27);
+		map2.put("y8", sy28);
+		map2.put("y9", sy29);
+		
 		map.put("d1", map1);
+		map.put("d2", map2);
 		  
 		return JSONObject.fromObject(map);
 	}

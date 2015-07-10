@@ -45,7 +45,7 @@ public class ImportKadSalesIntoCache
 			+ " from OM.OM_Order a "
 			+ " where " 
             + " to_char(a.CreateDate, 'yyyy-mm-dd') >= to_char(sysdate - 1, 'yyyy-mm-dd') "
-            + " and a.orderstatus not in (0,10,12) "
+            + " and a.orderstatus not in (10) "
             + " group by case when to_char(a.CreateDate,'yyyy-mm-dd') = to_char(sysdate - 1, 'yyyy-mm-dd') then 1 else 2 end, "
             + " to_char(a.CreateDate,'hh24'), "
             + " a.OrderSource, a.orderstatus "
@@ -179,7 +179,8 @@ public class ImportKadSalesIntoCache
 				orderstatus == 7 ||
 				orderstatus == 8 ||
 				orderstatus == 9 ||
-				orderstatus == 11
+				orderstatus == 11 ||
+				orderstatus == 12
 			 )
 			{
 				// 昨日累计
@@ -206,7 +207,8 @@ public class ImportKadSalesIntoCache
 					orderstatus == 7 ||
 					orderstatus == 8 ||
 					orderstatus == 9 ||
-					orderstatus == 11
+					orderstatus == 11 ||
+					orderstatus == 12
 					)
 			{
 				kadSalseObj.addyestodayTotal_6(ordersales);

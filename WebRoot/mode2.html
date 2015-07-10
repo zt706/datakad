@@ -92,9 +92,11 @@ width: 703px;
  var f = 0;
   var ws = null;  
   var data = null;
+  var type = '0';
+  
 $(function () {  
    if ('WebSocket' in window)  
-      ws = new WebSocket("ws://192.168.22.9:8080/datakad_new/websocket.ws");
+       ws = new WebSocket("ws://192.168.22.9:8080/datakad_new/websocket.ws");
    	  // ws = new WebSocket("ws://localhost:9090/datakad/websocket.ws"); 
     else if ('MozWebSocket' in window)  
       ws = new WebSocket("ws://192.168.22.9:8080/datakad_new/websocket.ws");
@@ -109,8 +111,21 @@ $(function () {
        //alert( document.getElementById("f1").innerHTML); 
        var obj = JSON.parse(evt.data); 
         data = obj;
-         setdata(obj.d1); 
-        setdata2(obj.d1); 
+        if(type == '0')									// 0 为四种状态
+        {
+        	setdata(obj.d1); 
+            setdata2(obj.d1); 
+            
+            console.log(" chu shi hua ==  "  + type);
+        }
+        else if(type == '1') 							// 1 为6种状态
+        {
+        	setdata(obj.d2); 
+            setdata2(obj.d2);
+            
+            console.log(" chu shi hua ==  "  + type);
+        }
+         
       
    };  
        ws.onerror = function() {  
@@ -727,16 +742,36 @@ function hidespan(){
 	document.getElementById("span1").style.display = "none";
 }
 
-function change(type){
+function changeTo4Status(){
 	if(type=='0'){
+		
+		console.log( "xian zai shi s 4  == bu gai bian  ");
+	}
+	else if(type=='1'){
 		setdata(data.d1);
 		setdata2(data.d1);
-	}
-	if(type=='1'){
-	setdata(data.d2);
-		setdata2(data.d2);
+		type = '0';
+		
+		console.log( "gai bian wei  " + type);
 	}
 }
+
+function changeTo6Status(){
+	if(type=='0'){
+		setdata(data.d2);
+		setdata2(data.d2);
+		type = '1';
+		
+		console.log( "gai bian wei  " + type);
+	}
+	else if(type=='1'){
+		
+		
+		console.log( "xian zai shi s 6  == bu gai bian ");
+	}
+}
+
+
 </script>
 <script type="text/javascript">
 (function (d) {
@@ -855,8 +890,8 @@ d.getElementsByTagName("head")[0].appendChild(t);
      			                        				<div class="live-chart-content" id="live_chart_0_content">
      			                       						<div class="chart c-border chart-collect" style="border: none;">     
      			                         						
-     			                         						  <div class="metrics"><label><input onclick = "change('0')" class="chart_radio" param="0" type="radio" name="live_chart_0_content_metric" checked="checked">4种状态</label><label>
-     			                  								<input onclick = "change('1')" class="chart_radio" param="1" type="radio" name="live_chart_0_content_metric">6种状态</label></div> 
+     			                         						  <div class="metrics"><label><input onclick = "changeTo4Status()" class="chart_radio" param="0" type="radio" name="live_chart_0_content_metric" checked="checked">4种状态</label><label>
+     			                  								<input onclick = "changeTo6Status()" class="chart_radio" param="1" type="radio" name="live_chart_0_content_metric">6种状态</label></div> 
      			                  									
      			                  									<div id="" style="width: 100%; border: none;" class="chart">
      			                  										<div id="content1" style="width:100%;height:250px;">
