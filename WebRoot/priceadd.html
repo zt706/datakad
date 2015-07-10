@@ -1,0 +1,330 @@
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+<style type="text/css"> 
+ 
+body{ margin:0px;text-align:center;background-color:#EBEBEB}
+#contner{ width:100%; margin:0px auto;}
+#header{ height:50px; background-color:#FF751A ;text-align:left;margin-bottom:10px}
+#leftnav{float:left; width:12%;border:1px;font-weight:bold;}
+#rightif{float:left; width:88%; border:0px solid #999966 ;background-color:#FFFFFF ;}
+#tab{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px }
+*{margin:0; padding:0}
+#condition{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB }
+#tubiao{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+#biaoge{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+
+#container{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF ;}
+#nav{ width:150px; margin:0px auto; text-align:right;}
+#nav h6{ cursor:pointer; line-height:50px; height:30px;margin-top:25px;font-weight:bolder;text-align:center; color:#615454}
+#nav a{display:block; line-height:24px;color:#666666;text-align:center; }
+#nav a:hover{background-color:#FAF3FA; color:#000;}
+#nav div{display:none; border-top:none}
+
+.icon-add
+{
+ background: url(img/a.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position: -16px -0px;
+}
+.icon-ad{
+ background: url(img/b.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position:-405px -95px;
+}
+  </style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>datakad棣栭〉</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <script>
+function getdata(){
+		 jQuery.ajax({
+                type: "Get",
+                url: "servlet/Price?type=1",
+                cache: false,
+                dataType: "json",
+                jsonp: "callback",
+                success: function (data) {
+                   showtable(data);
+                }
+            });
+				}
+
+function showtable(data){
+		var d="";
+		for (var key in data) { 
+		d=d+"<tr>" ;
+        var m = data[key];
+         d=d+"<td>"+m["name"]+"</td>";
+       		 for (var key2 in m) { 
+       		
+        		d=d+"<td><a href="+m[key2].split(";")[0]+">"+m[key2].split(";")[1]+"</a></td>"; }
+          	d=d+"</tr>";
+        }  
+        alert(d);
+		document.getElementById('price').innerHTML=d;
+	}
+	
+function query(){
+ 		var row = document.getElementById('row').value;
+		jQuery.ajax({
+                type: "Get",
+                url: "servlet/Price?type=2&row="+row,
+                cache: false,
+                dataType: "json",
+                jsonp: "callback",
+                success: function (data) {
+              
+                if(data==null){
+                return;}
+                document.getElementById('jk').value = data["jk"];
+                if(data["jk"]==undefined){
+                 document.getElementById('jk').value="";
+                }
+                document.getElementById('kx').value = data["kx"];
+                if(data["kx"]==undefined){
+                 document.getElementById('kx').value="";
+                }
+                document.getElementById('kd').value = data["kd"];
+                if(data["kd"]==undefined){
+                 document.getElementById('kd').value="";
+                }
+                document.getElementById('jy').value = data["jy"];
+                if(data["jy"]==undefined){
+                 document.getElementById('jy').value="";
+                }
+                document.getElementById('zk').value = data["zk"];
+                if(data["zk"]==undefined){
+                 document.getElementById('zk').value="";
+                }
+                document.getElementById('kzj').value = data["kzj"];
+                if(data["kzj"]==undefined){
+                 document.getElementById('kzj').value="";
+                }
+                document.getElementById('nb').value = data["nb"];
+                if(data["nb"]==undefined){
+                 document.getElementById('nb').value="";
+                }
+                document.getElementById('yk').value = data["yk"];
+                if(data["yk"]==undefined){
+                 document.getElementById('yk').value="";
+                }
+                document.getElementById('lbx').value = data["lbx"];
+                if(data["lbx"]==undefined){
+                 document.getElementById('lbx').value="";
+                }
+                document.getElementById('bj').value = data["bj"];
+                if(data["bj"]==undefined){
+                 document.getElementById('bj').value="";
+                }
+                document.getElementById('kyj').value = data["kyj"];
+                if(data["kyj"]==undefined){
+                 document.getElementById('kyj').value="";
+                }
+                document.getElementById('bzl').value = data["bzl"];
+                if(data["bzl"]==undefined){
+                 document.getElementById('bzl').value="";
+                }
+                document.getElementById('jx').value = data["jx"];
+                if(data["jx"]==undefined){
+                 document.getElementById('jx').value="";
+                }
+                document.getElementById('ht').value = data["ht"];
+               if(data["ht"]==undefined){
+                 document.getElementById('ht').value="";
+                }
+                document.getElementById('item').value=data["name"];
+                 if(data["name"]==undefined){
+                 document.getElementById('item').value="";
+                }
+                }
+            });
+	}
+	
+	function add(){
+	var item = document.getElementById('item').value;
+	var row = document.getElementById('row').value;
+	var mail = document.getElementById('mail').value;
+	if(item==""){
+	alert("名称不能为空");
+	return;
+		}
+		if(row==""){
+	alert("商品号不能为空");
+	return;
+		}
+		if(mail==""){
+	alert("电子邮箱不能为空");
+	return;
+		}
+	
+	 jQuery.ajax({
+                type: "Post",
+                url: "servlet/Price?type=3",
+                data:$('#f').serialize(),
+                cache: false,
+                dataType: "text",
+                jsonp: "callback",
+                success: function (data) {
+                   alert(data);
+                }
+            });
+            }
+  </script>
+  
+ <body>
+
+<div id="contner">
+<div id="header"><h3 style="margin-left:4%;color:#FFFFFF" onclick="getdata()"><img src="img/logo.gif"  /> &nbsp; &nbsp;&nbsp;kad数据分析平台</h3>
+</div>
+<div id="mian">
+<div id="leftnav">
+<div id="nav">
+<h6 onclick = getproduce()></h6>
+<div>
+<a href="http://www.baidu.com" target="ife">鍛靛懙</a>
+<a href="#">222</a>
+<a href="#">333</a> </div>
+<hr>
+<h6 onclick = getip()></h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = getvisitkeyword()></h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = getpage()></h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = show(this)></h6>
+<div>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+</div>
+<hr>
+<h6 onclick = show(this)></h6>
+<div>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+</div>
+<hr>
+</div>
+</div>
+<div id="rightif">
+<div align="center">
+    <div id="tubiao" style="min-width:600px;height:35px">商品添加页面</div>
+    <div id = "tab" style="min-width:600px;height:900px;">
+    <form id= "f" action="">
+    <table border="1" bordercolor="#FFF"  align =left width ="70%">
+    <tr align =center><td align =right width = 15% ><font color="#dd0000">*</font>商品名称</td>
+    <td width = 35%> <input id="item" name="item" class="span3" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right><font color="#dd0000">*</font>商品ID</td>
+    <td width = 35% >  <input class="span3" id="row" name="row" onchange="query()" type="text" placeholder=""  style="height:30;width:150px" >
+    <button onclick="query()" style="margin-bottom:10px" class ="btn btn-big btn-success" type ="button" >查询</button></td>
+    </tr>
+      <tr bgcolor="#f9f9f9" align =center><td align =right style="border-top-style:block" width = 15% ><font color="#dd0000">*</font>电子邮箱</td>
+    <td  width = 35%>  <input id="mail" name="mail" class="span3" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15%></td>
+    <td width = 35%>  </td>
+    </tr>
+    <tr><td> &nbsp;</td><td></td><td></td><td></td> </tr>
+     <tr bgcolor="#f9f9f9" align =center><td align =right style="border-top-style:block" width = 15% >健客网</td>
+    <td  width = 35%>  <input id="jk" name="jk" class="span3" type="text" placeholder="" style="height:30" ></td>
+    <td align =right width = 15%>开心人</td>
+    <td width = 35%>  <input class="span3" id="kx" name="kx" type="text" placeholder="" style="height:30" ></td>
+    </tr>
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >康德乐大药房</td>
+    <td width = 35%>  <input class="span3" id="kd" name="kd" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>健一</td>
+    <td width = 35%>  <input class="span3" id="jy" name="jy" type="text" placeholder="" style="height:30" ></td>
+    </tr>
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >再康网</td>
+    <td width = 35%>  <input class="span3" type="text" id="zk" name="zk" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>康之家</td>
+    <td width = 35%>  <input class="span3" type="text" id="kzj" name="kzj" placeholder="" style="height:30" ></td>
+    </tr>
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >诺本专科</td>
+    <td width = 35%>  <input class="span3" type="text" id="nb" name="nb" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>云开药网</td>
+    <td width = 35%>  <input class="span3" type="text" id="yk" name="yk" placeholder="" style="height:30" ></td>
+    </tr>
+     
+     <tr   bgcolor="#f9f9f9" bgcolor="#f9f9f9" align =center><td align =right width = 15% >老百姓大药房</td>
+    <td width = 35%>  <input class="span3" type="text" id="lbx" name="lbx" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>北京药品网</td>
+    <td width = 35%>  <input class="span3" type="text" id ="bj" name="bj" placeholder="" style="height:30" ></td>
+    </tr>
+    
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >快易捷</td>
+    <td width = 35%>  <input class="span3" id="kyj" name="kyj" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>宝芝林</td>
+    <td width = 35%>  <input class="span3" id="bzl" name="bzl" type="text" placeholder="" style="height:30" ></td>
+    </tr>
+   
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >金象网</td>
+    <td width = 35%>  <input class="span3" type="text" id="jx" name="jx" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>华佗医药</td>
+    <td width = 35%>  <input class="span3" type="text" id="ht" name="ht" placeholder="" style="height:30" ></td>
+    </tr>
+    
+      <tr bgcolor="#f9f9f9" align =center><td align =right style="border-top-style:block" width = 15% ></td>
+    <td  width = 35%>  </td>
+    <td width = 15%></td>
+    <td width = 35% align =right> <button onclick="add()" class ="btn btn-big btn-success" type ="button" >提交</button> </td>
+    </tr>
+    </table></form>
+   
+      </div>
+    </div>
+</div>
+</div>
+<div id="footer"></div>
+</div>   
+   </body>
+   
+    <script>
+ $('#datetimepicker').datetimepicker({
+        format: 'MM/dd/yyyy hh:mm',
+        language: 'en',
+        pickDate: true,
+        pickTime: true,
+        hourStep: 1,
+        minuteStep: 15,
+        secondStep: 30,
+        inputMask: true
+      });
+   </script>
+</html>

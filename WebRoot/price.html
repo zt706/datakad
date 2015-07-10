@@ -1,0 +1,305 @@
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+<style type="text/css"> 
+ 
+body{ margin:0px;text-align:center;background-color:#EBEBEB}
+#contner{ width:100%; margin:0px auto;}
+#header{ height:50px; background-color:#FF751A ;text-align:left;margin-bottom:10px}
+#leftnav{float:left; width:12%;border:1px;font-weight:bold;}
+#rightif{float:left; width:88%; border:0px solid #999966 ;background-color:#FFFFFF ;}
+#tab{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px }
+*{margin:0; padding:0}
+#condition{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB }
+#tubiao{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+#biaoge{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+
+#container{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF ;}
+#nav{ width:150px; margin:0px auto; text-align:right;}
+#nav h6{ cursor:pointer; line-height:50px; height:30px;margin-top:25px;font-weight:bolder;text-align:center; color:#615454}
+#nav a{display:block; line-height:24px;color:#666666;text-align:center; }
+#nav a:hover{background-color:#FAF3FA; color:#000;}
+#nav div{display:none; border-top:none}
+
+.icon-add
+{
+ background: url(img/a.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position: -16px -0px;
+}
+.icon-ad{
+ background: url(img/b.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position:-405px -95px;
+}
+  </style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>datakad〉</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <script>
+function getdata(){
+		 jQuery.ajax({
+                type: "Get",
+                url: "servlet/Price?type=1",
+                cache: false,
+                dataType: "json",
+                jsonp: "callback",
+                success: function (data) {
+                   showtable(data);
+                }
+            });
+				}
+
+	function showtable(data){
+	var n =0;
+		var d="";
+	//	d=d+"<tr><td>名称</td><td>健客网</td><td>康德乐大药房</td><td>健一</td><td>再康网</td><td>康之家</td><td>诺本专科</td><td>云开药网</td><td>老百姓大药房</td><td>北京药品网</td><td>快易捷</td><td>宝芝林</td><td>金象网</td><td>华佗医药</td></tr>";	
+		for (var key in data) { 
+		if(n==0){
+		d=d+"<tr class=success>" ;
+		n=1;
+			}else{
+			d=d+"<tr class=active>" ;
+			n=0;
+			}
+		//d=d+"<tr>" ;
+        var m = data[key];
+     
+         d=d+"<td>"+m["name"]+"</td>";  
+            				var jk = m["jk"];
+            				if(jk!=undefined){
+            					d=d+"<td><a href="+m["jk"].split(";")[0]+">"+m["jk"].split(";")[1]+"</a></td>";     
+            				}else{
+            				d=d+"<td></td>";
+            				}
+          					var kd = m["kd"]; 
+          					if(kd!=undefined){
+          						d=d+"<td><a href="+m["kd"].split(";")[0]+">"+m["kd"].split(";")[1]+"</a></td>"; 
+          					}else{
+            				d=d+"<td></td>";
+            				}
+        		  			var jy = m["jy"];
+        		  			if(jy!=undefined){
+        		  				d=d+"<td><a href="+m["jy"].split(";")[0]+">"+m["jy"].split(";")[1]+"</a></td>";
+        		  			}else{
+            				d=d+"<td></td>";
+            				}
+        			 		var zk = m["zk"];
+        			 		if(zk!=undefined){
+        			 		    d=d+"<td><a href="+m["zk"].split(";")[0]+">"+m["zk"].split(";")[1]+"</a></td>";        			 		
+        			 		}else{
+            				d=d+"<td></td>";
+            				}
+        			 		var kzj = m["kzj"];
+        			 		if(kzj!=undefined){
+        			 		d=d+"<td><a href="+m["kzj"].split(";")[0]+">"+m["kzj"].split(";")[1]+"</a></td>"; 
+        			 		}else{
+            				d=d+"<td></td>";
+            				}
+        					var nb = m["nb"];
+        					if(nb!=undefined){
+        					d=d+"<td width=5%><div style='width:50px'><a href="+m["nb"].split(";")[0]+">"+m["nb"].split(";")[1]+"</a><div></td>";
+        					}else{
+            				d=d+"<td width=5%></td>";
+            				}
+        					var yk = m["yk"];
+        					if(yk!=undefined){
+        					d=d+"<td><a href="+m["yk"].split(";")[0]+">"+m["yk"].split(";")[1]+"</a></td>";
+        					}else{
+            				d=d+"<td></td>";
+            				}	 
+        					var lbx = m["lbx"];
+        					if(lbx!=undefined){
+        					d=d+"<td><a href="+m["lbx"].split(";")[0]+">"+m["lbx"].split(";")[1]+"</a></td>";
+        					}else{
+            				d=d+"<td></td>";
+            				}	
+        					var bj = m["bj"];	 
+        					if(bj!=undefined){
+        					d=d+"<td><a href="+m["bj"].split(";")[0]+">"+m["bj"].split(";")[1]+"</a></td>";
+        					}else{
+            				d=d+"<td></td>";
+            				}		 
+        					var kyj = m["kyj"];
+        					if(kyj!=undefined){
+        					d=d+"<td><a href="+m["kyj"].split(";")[0]+">"+m["kyj"].split(";")[1]+"</a></td>"; 
+        					}else{
+            				d=d+"<td></td>";
+            				}				 
+        					var bzl = m["bzl"];
+        					if(bzl!=undefined){
+        					d=d+"<td><a href="+m["bzl"].split(";")[0]+">"+m["bzl"].split(";")[1]+"</a></td>";
+        					}else{
+            				d=d+"<td></td>";
+            				}				
+        					var jx = m["jx"];
+        					if(jx!=undefined){
+        					d=d+"<td><a href="+m["jx"].split(";")[0]+">"+m["jx"].split(";")[1]+"</a></td>"; 
+        					}else{
+            				d=d+"<td></td>";
+            				}						 
+        					var ht = m["ht"];
+        					if(ht!=undefined){
+        					d=d+"<td><a href="+m["ht"].split(";")[0]+">"+m["ht"].split(";")[1]+"</a></td>"; 
+        					}else{
+            				d=d+"<td></td>";
+            				}						       													
+          			d=d+"</tr>";
+       				 }  
+        //alert(d);
+							document.getElementById('price').innerHTML=d;
+				}
+	
+	function to(n){		
+			//var url ="priceadd.html";
+			//window.location.href=url;
+			if(n==1){
+			document.getElementById('tab').style.display = "block";
+			document.getElementById('tab2').style.display = "none";
+		
+			}else{
+			document.getElementById('tab').style.display = "none";
+			document.getElementById('tab2').style.display = "block";
+			}
+			
+		}
+  </script>
+  
+ <body onload="getdata()">
+
+<div id="contner">
+<div id="header"><h3 style="margin-left:4%;color:#FFFFFF" onclick="getdata()"><img src="img/logo.gif"  /> &nbsp; &nbsp;&nbsp;kad数据分析平台</h3>
+</div>
+<div id="mian">
+<div id="leftnav">
+<div id="nav">
+<h6 onclick = to(1)>商品价格查询</h6>
+<hr>
+<h6 onclick = to(2)>商品监控管理</h6>
+
+
+
+
+</div>
+</div>
+<div id="rightif">
+<div align="center">
+
+
+   <div id = "tab2" style="min-width:600px;height:900px;display:none" >
+    <form id= "f" action="">
+    <table border="1" bordercolor="#FFF"  align =left width ="70%">
+    <tr align =center><td align =right width = 15% ><font color="#dd0000">*</font>商品名称</td>
+    <td width = 35%> <input id="item" name="item" class="span3" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right><font color="#dd0000">*</font>商品ID</td>
+    <td width = 35% >  <input class="span3" id="row" name="row" onchange="query()" type="text" placeholder=""  style="height:30;width:150px" >
+    <button onclick="query()" style="margin-bottom:10px" class ="btn btn-big btn-success" type ="button" >查询</button></td>
+    </tr>
+      <tr bgcolor="#f9f9f9" align =center><td align =right style="border-top-style:block" width = 15% ><font color="#dd0000">*</font>电子邮箱</td>
+    <td  width = 35%>  <input id="mail" name="mail" class="span3" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15%></td>
+    <td width = 35%>  </td>
+    </tr>
+    <tr><td> &nbsp;</td><td></td><td></td><td></td> </tr>
+     <tr bgcolor="#f9f9f9" align =center><td align =right style="border-top-style:block" width = 15% >健客网</td>
+    <td  width = 35%>  <input id="jk" name="jk" class="span3" type="text" placeholder="" style="height:30" ></td>
+    <td align =right width = 15%>开心人</td>
+    <td width = 35%>  <input class="span3" id="kx" name="kx" type="text" placeholder="" style="height:30" ></td>
+    </tr>
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >康德乐大药房</td>
+    <td width = 35%>  <input class="span3" id="kd" name="kd" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>健一</td>
+    <td width = 35%>  <input class="span3" id="jy" name="jy" type="text" placeholder="" style="height:30" ></td>
+    </tr>
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >再康网</td>
+    <td width = 35%>  <input class="span3" type="text" id="zk" name="zk" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>康之家</td>
+    <td width = 35%>  <input class="span3" type="text" id="kzj" name="kzj" placeholder="" style="height:30" ></td>
+    </tr>
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >诺本专科</td>
+    <td width = 35%>  <input class="span3" type="text" id="nb" name="nb" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>云开药网</td>
+    <td width = 35%>  <input class="span3" type="text" id="yk" name="yk" placeholder="" style="height:30" ></td>
+    </tr>
+     
+     <tr   bgcolor="#f9f9f9" bgcolor="#f9f9f9" align =center><td align =right width = 15% >老百姓大药房</td>
+    <td width = 35%>  <input class="span3" type="text" id="lbx" name="lbx" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>北京药品网</td>
+    <td width = 35%>  <input class="span3" type="text" id ="bj" name="bj" placeholder="" style="height:30" ></td>
+    </tr>
+    
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >快易捷</td>
+    <td width = 35%>  <input class="span3" id="kyj" name="kyj" type="text" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>宝芝林</td>
+    <td width = 35%>  <input class="span3" id="bzl" name="bzl" type="text" placeholder="" style="height:30" ></td>
+    </tr>
+   
+     <tr  bgcolor="#f9f9f9" align =center><td align =right width = 15% >金象网</td>
+    <td width = 35%>  <input class="span3" type="text" id="jx" name="jx" placeholder="" style="height:30" ></td>
+    <td width = 15% align =right>华佗医药</td>
+    <td width = 35%>  <input class="span3" type="text" id="ht" name="ht" placeholder="" style="height:30" ></td>
+    </tr>
+    
+      <tr bgcolor="#f9f9f9" align =center><td align =right style="border-top-style:block" width = 15% ></td>
+    <td  width = 35%>  </td>
+    <td width = 15%></td>
+    <td width = 35% align =right> <button onclick="add()" class ="btn btn-big btn-success" type ="button" >提交</button> </td>
+    </tr>
+    </table></form>
+   
+      </div>
+
+    <div id = "tab" style="min-width:600px;">
+    <table border="1" bordercolor="#FFFF6F" class="table table-condensed">       
+                    <thead>
+                           <tr><td width=5%>名称</td><td width=5%>健客网</td><td width=5%>康德乐大药房</td><td width=5%>健一</td>
+                           <td width=5%>再康网</td><td width=5%>康之家</td><td width=5%>诺本专科</td><td width=5%>云开药网</td>
+                           <td width=5%>老百姓大药房</td><td width=5%>北京药品网</td><td width=5%>快易捷</td><td width=5%>宝芝林</td>
+                           <td width=5%>金象网</td><td width=5%>华佗医药</td></tr>
+                             </thead>        <tbody id="price">
+                            <tr class="active"> <td>1</td>  <td>aehyok</td> <td>leo</td><td>@aehyok</td> </tr>  
+                              <tr class="success"> <td>2</td>   <td>lynn</td>  <td>thl</td> <td>@lynn</td>  </tr>
+                              <tr class="warning">   <td>3</td>  <td>Amdy</td>   <td>Amy</td>   <td>@Amdy</td> </tr>
+                              <tr class="danger">    <td>4</td>    <td>Amdy</td>  <td>Amy</td>   <td>@Amdy</td>  </tr> 
+                               <tr >  <td class="success">5</td>      <td>Amdy</td>   <td>Amy</td><td">@Amdy</td></tr>
+                               </tbody>      </table>  </div>
+    </div>
+</div>
+</div>
+<div id="footer"></div>
+</div>   
+   </body>
+   
+    <script>
+ $('#datetimepicker').datetimepicker({
+        format: 'MM/dd/yyyy hh:mm',
+        language: 'en',
+        pickDate: true,
+        pickTime: true,
+        hourStep: 1,
+        minuteStep: 15,
+        secondStep: 30,
+        inputMask: true
+      });
+   </script>
+</html>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  
+  <servlet>
+          <servlet-name>DisplayChart</servlet-name>
+          <servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+	</servlet>
+	<servlet-mapping>
+          <servlet-name>DisplayChart</servlet-name>
+          <url-pattern>/DisplayChart</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>AajaxServlet</servlet-name>
+	<servlet-class>com.kad.server.control</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>AajaxServlet</servlet-name>
+	<url-pattern>/AajaxServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>search</servlet-name>
+	<servlet-class>com.kad.server.Search</servlet-class>
+	</servlet>
+  <servlet>
+
+    <servlet-name>KeyWord</servlet-name>
+    <servlet-class>com.kad.server.KeyWord</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Rank</servlet-name>
+    <servlet-class>com.kad.server.Rank</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RealCount</servlet-name>
+    <servlet-class>com.kad.server.RealCount</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Target</servlet-name>
+    <servlet-class>com.kad.server.Target</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Price</servlet-name>
+    <servlet-class>com.kad.server.Price</servlet-class>
+  </servlet>
+
+	<servlet-mapping>
+	<servlet-name>search</servlet-name>
+	<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>KeyWord</servlet-name>
+    <url-pattern>/KeyWord</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Rank</servlet-name>
+    <url-pattern>/servlet/Rank</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RealCount</servlet-name>
+    <url-pattern>/servlet/RealCount</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Target</servlet-name>
+    <url-pattern>/servlet/Target</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Price</servlet-name>
+    <url-pattern>/servlet/Price</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>  
+   <servlet-name>websocket</servlet-name>  
+    <servlet-class>com.kad.server.websock</servlet-class>  
+  </servlet>  
+  <servlet-mapping>
+    <servlet-name>websocket</servlet-name>  
+    <url-pattern>*.ws</url-pattern>  
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProduceServer</servlet-name>
+    <url-pattern>/servlet/ProduceServer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProduceServer2</servlet-name>
+    <url-pattern>/servlet/ProduceServer2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>tmail</servlet-name>
+    <url-pattern>/servlet/tmail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>traffic</servlet-name>
+    <url-pattern>/servlet/traffic</url-pattern>
+  </servlet-mapping>  
+   
+  
+    
+  <servlet>  
+    <servlet-name>initServlet</servlet-name>  
+   <servlet-class>com.kad.server.InitServlet</servlet-class>  
+    <load-on-startup>1</load-on-startup>  
+ </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ProduceServer</servlet-name>
+    <servlet-class>com.kad.server.ProduceServer</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ProduceServer2</servlet-name>
+    <servlet-class>com.kad.server.ProduceServer2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>tmail</servlet-name>
+    <servlet-class>com.kad.server.tmail</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>traffic</servlet-name>
+    <servlet-class>com.kad.server.traffic</servlet-class>
+  </servlet>
+
+
+
+  
+  
+  
+  <listener>  
+    <listener-class>com.kad.task.TaskTime2</listener-class>
+	</listener>  
+	 
+</web-app>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>数据魔方 </title>
+  <meta name="description" content="数据魔方 - 淘宝官方数据产品 - 让市场分析更简单！">
+  <meta name="keywords" content="数据魔方,魔方,cube,mofang,市场分析,淘词,数据分析,数据运营,行情,趋势,行业分析,品牌分析,产品分析,热卖宝贝,店铺排行,品牌排行,标题诊断">
+  
+  <link href="css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+   
+    <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+   <script src="./js/jquery-1.8.2.min.js"></script>
+    <script src="./js/hcharts/highcharts.js"></script>
+    
+  <link rel="shortcut icon" href="http://mofang.tbcdn.cn/img/favicon.ico">
+  <link type="text/css" rel="stylesheet" href="http://mofang.tbcdn.cn/css/common.css?1414825415" media="screen">
+  
+<link type="text/css" rel="stylesheet" href="http://mofang.tbcdn.cn/css/app/basic.css?1414825415" media="screen">
+<link href="./css/layout.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" async="" charset="utf-8" src="http://c.cnzz.com/core.php?web_id=1000181376&amp;t=q"></script>
+<script type="text/javascript" async="" id="tb-beacon-aplus" exparams="category=&amp;userid=&amp;aplus" src="http://a.tbcdn.cn/s/aplus_v2.js"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/util/event.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/view.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/util/cookie.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/util/class.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/ui/dialog.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/app/basic/p/config.js?1414825415"></script>
+<script type="text/javascript" async="" src="http://a.tbcdn.cn/s/fdc/??spm.js,spmact.js?v=141029"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/app/index.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/menu.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/app/basic/report/live.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/data/livedata.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/column2.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/ctrl/clock.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/ctrl/cate_filter.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/ctrl/shop_filter.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/live_chart.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/live_info.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/live_bar.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/live_table.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/live_map.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/ui/delay_tip.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/chart.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/util/tip.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/view/combo.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/util/pinyin.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/com/data/category.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/util/cate_info.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/core/underscore-1.4.2.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/core/jquery.mousewheel.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/ui/jscrollpane.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/core/liveMap.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/core/raphael.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/core/swfobject.js?1414825415"></script>
+<script type="text/javascript" async="" charset="utf-8" src="http://mofang.tbcdn.cn/js/lib/core/datav.js?1414825415"></script>
+<script type="text/javascript" async="" src="http://g.tbcdn.cn/sd/data_sufei/1.1.8/aplus/index.js"></script>
+<script src="./js/jquery.mobile.min.js"></script>
+<link rel="stylesheet" href="./css/jquery.mobile.min.css">
+</head>
+<body class="colorTipContainer" onload="update()">
+
+<style type="text/css"> 
+
+.main-t {
+width: 200px;
+min-width: 200px;
+}
+
+.yellow_tip {
+background-color: #f9edb9;
+border: 1px solid #efc45e;
+border-radius: 4px;
+color: #333;
+padding: 5px 10px;
+}
+
+.colorTip {
+display: none;
+position: absolute;
+left: 40%;
+padding: 6px;
+background-color: white;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 11px;
+font-weight: normal;
+line-height: 21px;
+text-decoration: none;
+text-align: left;
+text-shadow: 0 0 1px white;
+width: 703px;
+}
+ </style>
+
+<script type="text/javascript">
+ var f = 0;
+ var f2 = '1';
+  var ws = null;  
+  var data = null;
+  
+  Highcharts.createElement('link', { href: 'http://fonts.googleapis.com/css?family=Dosis:400,600', rel: 'stylesheet', type: 'text/css' }, 
+  null, document.getElementsByTagName('head')[0]);
+  Highcharts.theme = { colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"], 
+  chart: { backgroundColor: null, style: { fontFamily: "Dosis, sans-serif" } }, 
+  title: { style: { fontSize: '16px', fontWeight: 'bold', textTransform: 'uppercase' } }, 
+  tooltip: { borderWidth: 0, backgroundColor: 'rgba(219,219,216,0.8)', shadow: false }, legend: { itemStyle: { fontWeight: 'bold', fontSize: '13px' } },
+   xAxis: { gridLineWidth: 1, labels: { style: { fontSize: '12px' } } }, yAxis: { minorTickInterval: 'auto', title: { style: { textTransform: 'uppercase' } }, 
+   labels: { style: { fontSize: '12px' } } }, plotOptions: { candlestick: { lineColor: '#404048' } }, background2: '#F0F0EA' };
+  Highcharts.setOptions(Highcharts.theme);
+  
+$(function () {  
+   if ('WebSocket' in window)  
+        ws = new WebSocket("ws://192.168.8.186:8080/datakad/websocket.ws");  
+    else if ('MozWebSocket' in window)  
+       ws = new MozWebSocket("ws://192.168.8.186:8080/datakad/websocket.ws");  
+    else  
+       alert("not support");  
+      
+      
+   ws.onmessage = function(evt) {   
+      // alert(evt.data); 
+       //setdata(evt.data); 
+       //alert( document.getElementById("f1").innerHTML); 
+       var obj = JSON.parse(evt.data); 
+        data = obj;
+         setdata(obj.d1); 
+        //setdata2(obj.d1); 
+      
+   };  
+       ws.onerror = function() {  
+                               //连接失败  
+                        alert("连接错误");
+                 }  ;
+      
+    ws.onclose = function(evt) {  
+        alert("系统关闭");  
+    };  
+      
+    ws.onopen = function(evt) {  
+       //alert("open");  
+       
+    };   	
+});  
+ 
+ function setdata2(obj){
+  		document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.f1+"元</strong>";
+         document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f2+"元</strong>";
+           document.getElementById("f3").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.f4+"元</strong>";
+         document.getElementById("f4").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f5+"元</strong>";
+           document.getElementById("f5").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.f6+"元</strong>";
+         document.getElementById("f6").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f7+"元</strong>";
+           document.getElementById("f7").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.f8+"元</strong>";
+         document.getElementById("f8").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f9+"元</strong>";
+           document.getElementById("f9").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.f10+"元</strong>";
+         document.getElementById("f10").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f11+"元</strong>";
+           document.getElementById("f11").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.f12+"元</strong>";
+         document.getElementById("f12").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f13+"元</strong>";
+         document.getElementById("f13").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f14+"元</strong>";
+         document.getElementById("f14").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f15+"元</strong>";
+         document.getElementById("f15").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f16+"元</strong>";
+         document.getElementById("f16").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.f17+"元</strong>";
+
+ 		document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.y1+"元</strong>";
+         document.getElementById("y2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.y2+"元</strong>";
+           document.getElementById("y3").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.y3+"元</strong>";
+         document.getElementById("y4").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.y4+"元</strong>";
+           document.getElementById("y5").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:##3c9dff>"+obj.y5+"元</strong>";
+         document.getElementById("y6").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.y6+"元</strong>";
+           document.getElementById("y7").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.y7+"元</strong>";
+          document.getElementById("y8").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#ff9e00>"+ obj.y8+"元</strong>";
+        
+       //data = evt.data;
+ }
+ 
+ 
+ function update(){
+ 
+ setInterval("sendMsg()",5000); 
+ setInterval("skip()",20000); 
+
+ }
+function sendMsg() { 
+	if(f%30==0){
+	
+	 ws.send("");  
+	}
+	f=f+1;
+   
+} 
+
+function skip(){
+//setdata(data); 
+var type =f2;
+if(type=='1'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f1+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f2+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y1+"元</strong>";
+  document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>全网</strong>";
+ 
+
+var d=document.getElementById('skip8');
+f2='2';
+setdata(data.d1); 
+ d.click();
+}
+if(type=='2'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f4+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f5+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y2+"元</strong>";
+ document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>天猫</strong>";
+var d=document.getElementById('skip1');
+f2='3';
+setdata(data.d1); 
+ d.click();
+}
+if(type=='3'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f6+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f7+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y3+"元</strong>";
+ document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>官网</strong>";
+var d=document.getElementById('skip2');
+f2='4';
+setdata(data.d1); 
+ d.click();
+}
+
+if(type=='4'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f8+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f9+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y4+"元</strong>";
+ document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>WAP</strong>";
+var d=document.getElementById('skip3');
+f2='5';
+setdata(data.d1); 
+ d.click();
+}
+
+if(type=='5'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f10+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f11+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y5+"元</strong>";
+ document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>Android</strong>";
+var d=document.getElementById('skip4');
+f2='6';
+setdata(data.d1); 
+ d.click();
+}
+
+if(type=='6'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f12+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f13+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y6+"元</strong>";
+  document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>京东</strong>";
+var d=document.getElementById('skip5');
+f2='7';
+setdata(data.d1); 
+ d.click();
+}
+
+if(type=='7'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f14+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f15+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y7+"元</strong>";
+ document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>IOS</strong>";
+var d=document.getElementById('skip6');
+f2='8';
+setdata(data.d1); 
+ d.click();
+}
+
+if(type=='8'){
+document.getElementById("f1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.f16+"元</strong>";
+document.getElementById("f2").innerHTML = "<strong style=font-size: 28px;font-weight: 700;color:#0000FF>"+ data.d1.f17+"元</strong>";
+ document.getElementById("y1").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFFFF>"+data.d1.y8+"元</strong>";
+ document.getElementById("title").innerHTML =  "<strong style=font-size: 28px;font-weight: 700;color:#FFFF00>自建</strong>";
+var d=document.getElementById('skip7');
+f2='1';
+setdata(data.d1); 
+ d.click();
+}
+
+} 
+
+function setdata(data) {
+	
+var obj = data; 
+Highcharts.setOptions({ 
+    colors: ['#D52B4D', '#ff9e00', '#004B97', '#24CBE5', '#64E572', '#FF9655', 
+'#FFF263', '#6AF9C4'] 
+}); 
+    $('#content1').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time2
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        spline: {
+       			 lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+         
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count
+        }, {
+       		 visible:true,
+            name: '昨天',
+            data: obj.count2
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+     $('#content12').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+       			 lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+       
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count4
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count6
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content13').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count5
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count7
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content14').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count8
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count9
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content15').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+      		  lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count10
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count11
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content16').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count12
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count13
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content17').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'Â°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count14
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count15
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content18').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'Â°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count16
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count17
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+};
+
+function showspan(){
+	//alert(document.getElementById("span1").style.display);
+	document.getElementById("span1").style.display = "block";
+}
+function hidespan(){
+	//alert(document.getElementById("span1").style.display);
+	document.getElementById("span1").style.display = "none";
+}
+
+function change(type){
+	if(type=='0'){
+		setdata(data.d1);
+		setdata2(data.d1);
+	}
+	if(type=='1'){
+	setdata(data.d2);
+		setdata2(data.d2);
+	}
+}
+</script>
+<script type="text/javascript">
+(function (d) {
+var t=d.createElement("script");t.type="text/javascript";t.async=true;t.id="tb-beacon-aplus";
+t.setAttribute("exparams","category=&userid=&aplus");
+t.src=("https:"==d.location.protocol?"https://s":"http://a")+".tbcdn.cn/s/aplus_v2.js";
+d.getElementsByTagName("head")[0].appendChild(t);
+})(document);
+</script>
+  
+     			         								<div class="live_chart_total" style="width:100%;height:70px;background:#D52B4D;color:#FFFFFF">
+     			                   							<div class="total_today"  style = "width: 200px;color:#FFFFFF;margin-left:45px">    <span>今日累计（元）</span><p id="f1"><strong></strong></p>   
+     			                     						 </div>
+     			                     						 <div class="total_today"  style = "width: 200px;color:#FFFFFF">    <span>昨日同期累计（元）</span><p id="y1"><strong></strong></p>   
+     			                     						 </div>  
+     			                     					 	 <div class="total_yestoday" style="color:#FFFF00">    <span>昨日累计（元）</span>  <p id="f2"> <strong></strong></p>  
+     			                      					 	</div>
+     			                      					 	<p id="title" style="float:right;margin-right:35px;margin-top:30px"><strong style="font-size: 28px;font-weight: 700;color:#FFFF00">官网</strong></p>
+     			                      					 </div> 
+						<div data-role="page" id="page1" style="margin-top: 70px">    
+     			               			  <a href="#page2" id="skip1" data-transition="slide"></a>                 								
+     			           	<div id="content1" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+						<div data-role="page" id="page2" style="margin-top: 70px">    
+     			               			  <a href="#page3" id="skip2" data-transition="slide"></a>                 								
+     			           	<div id="content12" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+						<div data-role="page" id="page3" style="margin-top: 70px">    
+     			               			  <a href="#page4" id="skip3" data-transition="slide"></a>                 								
+     			           	<div id="content13" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+						<div data-role="page" id="page4" style="margin-top: 70px">    
+     			               			  <a href="#page5" id="skip4" data-transition="slide"></a>                 								
+     			           	<div id="content14" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+						<div data-role="page" id="page5" style="margin-top: 70px">    
+     			               			  <a href="#page6" id="skip5" data-transition="slide"></a>                 								
+     			           	<div id="content15" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+						<div data-role="page" id="page6" style="margin-top: 70px">    
+     			               			  <a href="#page7" id="skip6" data-transition="slide"></a>                 								
+     			           	<div id="content16" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+						<div data-role="page" id="page7" style="margin-top: 70px">    
+     			               			  <a href="#page8" id="skip7" data-transition="slide"></a>                 								
+     			           	<div id="content17" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+
+     			       <div data-role="page" id="page8" style="margin-top: 70px">    
+     			               			  <a href="#page1" id="skip8" data-transition="slide"></a>                 								
+     			           	<div id="content18" style="width:100%;height:700px;"></div>
+    			          
+						</div>
+
+
+
+<script type="text/javascript" src="http://mofang.tbcdn.cn/js/loader.js?1414825415"></script>
+
+

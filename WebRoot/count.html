@@ -1,0 +1,550 @@
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+<style type="text/css"> 
+ 
+body{ margin:0px;text-align:center;background-color:#EBEBEB}
+#contner{ width:100%; margin:0px auto;}
+#header{ height:50px; background-color:#FF751A ;text-align:left;margin-bottom:10px}
+#leftnav{float:left; width:12%;border:1px;font-weight:bold;}
+#rightif{float:left; width:88%; border:0px solid #999966 ;background-color:#FFFFFF ;}
+#tab{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px }
+*{margin:0; padding:0}
+#condition{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB }
+#tubiao{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+#biaoge{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+
+#container{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF ;}
+#nav{ width:150px; margin:0px auto; text-align:right;}
+#nav h6{ cursor:pointer; line-height:50px; height:30px;margin-top:25px;font-weight:bolder;text-align:center; color:#615454}
+#nav a{display:block; line-height:24px;color:#666666;text-align:center; }
+#nav a:hover{background-color:#FAF3FA; color:#000;}
+#nav div{display:none; border-top:none}
+
+.icon-add
+{
+ background: url(img/a.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position: -16px -0px;
+}
+.icon-ad{
+ background: url(img/b.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position:-405px -95px;
+}
+  </style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>datakad棣栭〉</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <script>
+  var type =0;
+  function remainTime(){  
+    if(type==1){  
+      getproduce();
+    }  
+   setTimeout("remainTime()",180000);  
+	} 
+  
+  remainTime();  
+function show(id){
+	var next = id.nextElementSibling || src.nextSibling;
+	next.style.display = (next.style.display =="block")?"none":"block";
+	}
+//商品访问图形表
+function graph(data) {
+	//alert(data.name);
+	//alert(data.count);
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            margin: [ 50, 50, 100, 80]
+        },
+        title: {
+            text: '商品访问次数'
+        },
+        xAxis: {
+            categories: data.name,
+            labels: {
+                rotation: -45,
+                align: 'right',
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Population (millions)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>',
+        },
+        series: [{
+            name: 'Population',
+            data: data.count,
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
+        }]
+    });
+};
+	
+
+
+function getdata(){
+$.ajax({
+             type: "GET",
+             url: "AajaxServlet",
+             dataType: "json",
+             success: function(data){
+              createtab(data);
+             // setdata(data);
+                      }
+         });
+}
+
+function ipgraph(data){
+		
+	  $('#container').highcharts({
+        title: {
+            text: '当日IP访问数',
+            x: -20 //center
+        },
+       subtitle: {
+            text: 'Source: kad360.com',
+            x: -20
+        },
+         xAxis: {
+            categories: data.times
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '今天ip访问数',
+            data: data.values
+            },{
+         	name: '昨天ip访问数',
+         	data: data.yesvalues
+        }]
+    });	
+	}
+	
+	function ipgraph2(data){
+		
+	  $('#container2').highcharts({
+        title: {
+            text: '2小时内IP访问数',
+            x: -20 //center
+        },
+       subtitle: {
+            text: 'Source: kad360.com',
+            x: -20
+        },
+         xAxis: {
+            categories: data.mintimes
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '今天ip访问数',
+            data: data.minvalues
+            },{
+         	name: '昨天ip访问数',
+         	data: data.minyesvalues
+        }]
+    });	
+	}
+	function sourcepageipgraph(data){
+	 $('#container').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Browser market shares at a specific website, 2014'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: data.data
+        }]
+    });
+	}
+	//来源渠道
+	
+	//ip访问报表
+	function createvisitkeywordtab(msg){
+		var data = "";
+		var r = msg;
+		//alert(r);	
+	 data += '<table width =100% class=table table-condensed><thead><tr><th>排名</th><th>商品名称</th><th>访问次数</th></tr></thead><tbody>';
+        for (var i = 0; i < r.length; i++) {
+        var c = r[i];
+        var j=i+1;
+        var pic = "http://img.360kad.com/UploadFiles/"+c.pic;
+       if(i%2==0){
+       		data += '<tr bgcolor=#F5F5F5 height=30px>';
+       }else{
+       		data += '<tr bgcolor=#FCF8E3 height=30px>';
+       }              
+          data +='<td>'+j+'</td><td>' + c.name +'</td><td>' + c.count +'</td></tr>';
+        }
+        data += '</tbody><table>';
+         document.getElementById('tab').innerHTML = data;
+    	}
+    	
+    //商品访问报表
+    function createtab(msg){
+		var data = "";
+		var r = msg;
+		//alert(r);	
+	 data += '<table width =100% class=table table-condensed><thead><tr><th>排名</th><th></th><th>商品名称</th><th>URL</th><th>访问次数</th></tr></thead><tbody>';
+        for (var i = 0; i < r.length; i++) {
+        var c = r[i];
+        var j=i+1;
+        var pic = "http://img.360kad.com/UploadFiles/"+c.pic;
+       if(i%2==0){
+       		data += '<tr bgcolor=#F5F5F5 height=30px>';
+       }else{
+       		data += '<tr bgcolor=#FCF8E3 height=30px>';
+       }              
+          data +='<td>'+j+'</td><td><a href=http://www.360kad.com/product/'+c.id+'.shtml><img style=width:60px;height:60px; src='+pic+' /></a></td><td>' + c.name +'</td><td>http://www.360kad.com/product/' + c.id +'.shtml</td><td>' + c.count +'</td></tr>';
+        }
+        data += '</tbody><table>';
+         document.getElementById('tab').innerHTML = data;
+    	}
+    	
+    	//IP访问报表
+    	 function createiptab(msg){
+		var data = "";
+		var t = msg.times;
+		var v = msg.values;
+		//alert(r);	
+	 data += '<table width =100% class=table table-condensed><thead><tr><th>排名</th><th>时间段</th><th>IP数</th></tr></thead><tbody>';
+        for (var i = 0; i < t.length; i++) {    
+        var j=i+1;
+       if(i%2==0){
+       		data += '<tr bgcolor=#F5F5F5 height=30px>';
+       }else{
+       		data += '<tr bgcolor=#FCF8E3 height=30px>';
+       }              
+          data +='<td>'+j+'</td><td>' + t[i]+'</td><td>' + v[i] +'</td></tr>';
+        }
+        data += '</tbody><table>';
+         document.getElementById('tab').innerHTML = data;
+    	}
+    	
+    	//来源
+    	  function createpagetab(msg){
+		var data = "";
+		var r = msg.data2;
+	 data += '<table width =100% class=table table-condensed><thead><tr><th>排名</th><th>目的页面类型</th><th>次数</th></tr></thead><tbody>';
+        for (var i = 0; i < r.length/2; i++) {
+        var j=i+1;
+        //alert();
+       if(i%2==0){
+       		data += '<tr bgcolor=#F5F5F5 height=30px>';
+       }else{
+       		data += '<tr bgcolor=#FCF8E3 height=30px>';
+       }              
+          data +='<td>'+j+'</td><td>'+r[2*i]+'</td><td>' + r[2*i+1] +'</td></tr>';
+        }
+        data += '</tbody><table>';
+         document.getElementById('tab').innerHTML = data;
+    	}
+    	
+    	
+    	
+   function getproduce(){
+ 	  type=1;
+   		$.ajax({
+             type: "post",
+             url: "servlet/RealCount",
+             dataType: "json",
+              data:{'type':type},
+             success: function(data){
+             //alert(data);
+             if(data==""){
+             return;
+             }
+             createtab(data.data);
+             graph(data);
+                      }
+         });	
+   	}
+   	
+   	 function getip(){
+   		type=2;
+   		$.ajax({
+             type: "post",
+             url: "servlet/RealCount",
+             dataType: "json",
+              data:{'type':type},
+             success: function(data){
+             alert(data);
+             if(data==""){
+             return;
+             }
+             createiptab(data);
+            ipgraph(data);
+             ipgraph2(data);
+                      }
+         });	
+   	}
+   	
+   	 function getvisitkeyword(){
+  		 type=3;
+   		$.ajax({
+             type: "post",
+             url: "servlet/RealCount",
+             dataType: "json",
+              data:{'type':type},
+             success: function(data){
+          
+             if(data==""){
+             return;
+             }
+            createvisitkeywordtab(data.data);
+            graph(data);
+                      }
+         });	
+   	}
+   	
+   	 function getsourcepage(){
+  		 type=4;
+   		$.ajax({
+             type: "post",
+             url: "servlet/RealCount",
+             dataType: "json",
+              data:{'type':type},
+             success: function(data){
+         
+             if(data==""){
+             return;
+             }
+            createsorcetab(data);
+            //graph(data);
+                      }
+         });	
+   	}
+   	
+   	 function getpage(){
+  		 type=5;
+   		$.ajax({
+             type: "post",
+             url: "servlet/RealCount",
+             dataType: "json",
+              data:{'type':type},
+             success: function(data){
+         	alert(data);
+             if(data==""){
+             return;
+             }
+            sourcepageipgraph(data);
+            createpagetab(data);
+                      }
+         });	
+   	}
+   	
+   function showtable(i){
+   if(i==0){
+   	document.getElementById('container').style.display="none";
+   	document.getElementById('container2').style.display="none";
+   	 	document.getElementById('tab').style.display="block";
+   	}
+   if(i==1){
+   	 	document.getElementById('container').style.display="block";
+   	 	 document.getElementById('tab').style.display="none";
+   	 	if(type==2){
+   	 	   	 	document.getElementById('container2').style.display="block";  	 	
+   	 	}else{
+   	 	   	 	document.getElementById('container2').style.display="none";
+   	 	}
+   	}
+   }
+  </script>
+  
+ <body>
+
+<div id="contner">
+<div id="header"><h3 style="margin-left:4%;color:#FFFFFF" onclick="getdata()"><img src="img/logo.gif"  /> &nbsp; &nbsp;&nbsp;kad数据分析平台</h3>
+</div>
+<div id="mian">
+<div id="leftnav">
+<div id="nav">
+<h6 onclick = getproduce()>商品访问实时监控</h6>
+<div>
+<a href="http://www.baidu.com" target="ife">鍛靛懙</a>
+<a href="#">222</a>
+<a href="#">333</a> </div>
+<hr>
+<h6 onclick = getip()>访问IP实时监控</h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = getvisitkeyword()>关键词实时监控</h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = getpage()>来源页面分析</h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = show(this)>实时监控</h6>
+<div>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+</div>
+<hr>
+<h6 onclick = show(this)>实时监控</h6>
+<div>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+</div>
+<hr>
+</div>
+</div>
+<div id="rightif">
+<div align="center">
+	<div id ="condition" style="min-width:600px;height:30px">开始时间: &nbsp;&nbsp;<input type ="text" id = "size">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 结束时间:&nbsp;&nbsp; <span id="datetimepicker" class="input-append date">
+      <input type="text"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </span>&nbsp;&nbsp;&nbsp;
+    <button onclick="getdata()" class ="btn btn-small btn-success" type ="button" >查询</button>
+    </div>
+    <div id="tubiao" style="min-width:600px;height:35px"><button onclick ="showtable(0)" type="button" class="btn btn-info">表格报表</button><button onclick ="showtable(1)" style="margin-left:15px" type="button" class="btn btn-info">图形报表</button></div>
+    <div id="container" style="min-width:600px;height:400px;"></div>
+     <div id="container2" style="min-width:600px;height:400px;"></div>
+    <div id = "tab" style="min-width:600px;height:900px;display:none">
+    <table class="table table-condensed">
+            <caption>Table</caption>
+                    <thead>
+                              <tr>  <th>#</th>  <th>商品编号</th><th>商品名称</th><th>访问次数</th></tr>  </thead>        <tbody>
+                            <tr class="active"> <td>1</td>  <td>aehyok</td> <td>leo</td><td>@aehyok</td> </tr>  
+                              <tr class="success"> <td>2</td>   <td>lynn</td>  <td>thl</td> <td>@lynn</td>  </tr>
+                              <tr class="warning">   <td>3</td>  <td>Amdy</td>   <td>Amy</td>   <td>@Amdy</td> </tr>
+                              <tr class="danger">    <td>4</td>    <td>Amdy</td>  <td>Amy</td>   <td>@Amdy</td>  </tr> 
+                               <tr >  <td class="success">5</td>      <td>Amdy</td>   <td>Amy</td><td">@Amdy</td></tr>
+                               </tbody>      </table>  </div>
+    </div>
+</div>
+</div>
+<div id="footer"></div>
+</div>   
+   </body>
+   
+    <script>
+ $('#datetimepicker').datetimepicker({
+        format: 'MM/dd/yyyy hh:mm',
+        language: 'en',
+        pickDate: true,
+        pickTime: true,
+        hourStep: 1,
+        minuteStep: 15,
+        secondStep: 30,
+        inputMask: true
+      });
+   </script>
+</html>

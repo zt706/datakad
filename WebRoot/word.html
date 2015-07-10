@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>word.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  <script>
+  function commit(){
+  var word = document.getElementById('word').value;
+  
+    window.returnValue=word;
+  window.close();
+  }
+  </script>
+  <body>
+    This is my HTML page. <br>
+    <textarea id ="word" cols ="50" rows = "3000"></textarea>
+    <a onclick ="commit()" href="javascript:;">提交</a>
+  </body>
+</html>

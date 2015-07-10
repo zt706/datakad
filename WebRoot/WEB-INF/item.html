@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <title>item.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+  <script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="./js/jquery.mobile.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="./css/jquery.mobile.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+  </head>
+  <script type="text/javascript">
+    var f = '1';
+  var ws = null;  
+  var data = null;
+$(function () {  
+   if ('WebSocket' in window)  
+        ws = new WebSocket("ws://192.168.8.183:8080/datakad/websocket.ws");  
+    else if ('MozWebSocket' in window)  
+       ws = new MozWebSocket("ws://192.168.8.183:8080/datakad/websocket.ws");  
+    else  
+       alert("not support");  
+      
+      
+   ws.onmessage = function(evt) {  
+ 
+       var obj = JSON.parse(evt.data);
+       
+        setdata(obj.d1); 
+   };  
+       ws.onerror = function() {  
+                               //连接失败  
+                        alert("连接错误");
+                 }  ;
+      
+    ws.onclose = function(evt) {  
+        alert("系统关闭");  
+    };  
+      
+    ws.onopen = function(evt) {  
+       alert("open");  
+       
+    };   	
+});  
+ 
+ function update(){
+
+ setInterval("sendMsg()",50000); 
+ //setInterval("skip()",20000); 
+ }
+function sendMsg() {  
+alert("aa");
+    ws.send("");  
+} 
+
+function setdata(data) {
+	
+var obj = data; 
+Highcharts.setOptions({ 
+    colors: ['#ff9e00', '#3c9dff', '#004B97', '#24CBE5', '#64E572', '#FF9655', 
+'#FFF263', '#6AF9C4'] 
+}); 
+    $('#content1').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time2
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: { 
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+         
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count
+        }, {
+       		 visible:true,
+            name: '昨天',
+            data: obj.count2
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+     $('#content12').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+       			 lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count4
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count6
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content13').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count5
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count7
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content14').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count8
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count9
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content15').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+      		  lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count10
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count11
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content16').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count12
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count13
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content17').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'Â°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count14
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count15
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+    
+    $('#content18').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+        	min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'Â°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+        		lineWidth: 3,
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+        	visible:true,
+            name: '今天',
+            data: obj.count16
+        },{
+        	visible:true,
+            name: '昨天',
+            data: obj.count17
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+};
+    </script>
+  <body onload="update()">
+   <div data-role="page" id="page1">
+<a id="skip1" href="#page2" data-transition="slide"></a>
+<div id="container" style="width:97%;height:100%;"></div>
+</div>
+
+<div data-role="page" id="page2">
+ <a href="#page3" id="skip2" data-transition="slide"></a>
+<div  id="container12" style="width:97%;height:100%;"> </div>
+</div>
+
+<div data-role="page" id="page3">
+ <a href="#page4" id="skip3" data-transition="slide"></a>
+<div  id="container13" style="width:97%;height:100%;"> </div>
+</div>
+
+<div data-role="page" id="page4">
+<a id="skip4" href="#page5" data-transition="slide"></a>
+<div id="container14" style="width:97%;height:100%;"></div>
+</div>
+
+<div data-role="page" id="page5">
+ <a href="#page6" id="skip5" data-transition="slide"></a>
+<div  id="container15" style="width:97%;height:100%;"> </div>
+</div>
+
+<div data-role="page" id="page6">
+ <a href="#page7" id="skip6" data-transition="slide"></a>
+<div  id="container16" style="width:97%;height:100%;"> </div>
+</div>
+
+<div data-role="page" id="page7">
+<a id="skip7" href="#page8" data-transition="slide"></a>
+<div id="container17" style="width:97%;height:100%;"></div>
+</div>
+
+<div data-role="page" id="page8">
+ <a href="#page1" id="skip8" data-transition="slide"></a>
+<div  id="container18" style="width:97%;height:100%;"> </div>
+</div>
+
+
+   
+   
+    <script>
+ $('#datetimepicker').datetimepicker({
+        format: 'MM/dd/yyyy hh:mm',
+        language: 'en',
+        pickDate: true,
+        pickTime: true,
+        hourStep: 1,
+        minuteStep: 15,
+        secondStep: 30,
+        inputMask: true
+      });
+   </script>
+  </body>
+</html>

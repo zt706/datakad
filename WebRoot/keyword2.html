@@ -1,0 +1,139 @@
+
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+<style type="text/css"> 
+ 
+body{ margin:0px;text-align:center;background-color:#EBEBEB}
+#contner{ width:100%; margin:0px auto;}
+#header{ height:50px; background-color:#FF751A ;text-align:left;margin-bottom:10px}
+#leftnav{float:left; width:12%;border:1px;font-weight:bold;}
+#rightif{float:left; width:88%; border:0px solid #999966 ;background-color:#FFFFFF ;}
+#tab{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px }
+*{margin:0; padding:0}
+#condition{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB }
+#tubiao{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+.biaoge{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+
+#container{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF ;}
+#nav{ width:150px; margin:0px auto; text-align:right;}
+#nav h6{ cursor:pointer; line-height:50px; height:30px;margin-top:25px;font-weight:bolder;text-align:center}
+#nav a{display:block; line-height:24px;color:#666666;text-align:center; }
+#nav a:hover{background-color:#FAF3FA; color:#000;}
+#nav div{display:none; border-top:none}
+
+  </style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>datakad首页</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <script>
+function showpro(){
+		document.getElementById('addpro').style.display = "block";	
+}
+function showword(){
+		document.getElementById('addword').style.display = "block";	
+}
+  </script>
+  
+ <body>
+
+<div id="contner">
+<div id="header"><h3 style="margin-left:4%;color:#FFFFFF" onclick="getdata()"><img src="img/logo.gif"  /> &nbsp; &nbsp;&nbsp;kad数据分析平台</h3>
+</div>
+<div id="mian">
+<div id="leftnav">
+<div id="nav">
+</div>
+  <div class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
+               href="javascript:;">
+                搜索引擎 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                <li class="dropdown-submenu"><a href="javascript:;">百度</a>
+                <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="javascript:;">二级菜单</a></li>
+                        <li class="divider">4</li>
+                        <li>
+                            <a href="javascript:;">二级菜单</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu"><a href="javascript:;">360</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-submenu">
+                    <a tabindex="-1" href="javascript:;">一级菜单</a>
+                    
+                </li>
+            </ul>
+        </div>
+</div><!--这部分是左侧导航-->
+<div id="rightif">
+<div align="center">
+<div class="biaoge"  style="min-width:600px;height:30px"><span onclick="showpro()">添加栏目</span><span onclick="showword()" style="margin-left:50px">添加关键词</span></div>
+    <div class="biaoge"  id = "addpro" style="min-width:600px;height:70px;display:none">添加栏目：<table><tr><td>搜索引擎 </td><td> 
+   <select>  
+  <option value ="1">Volvo</option>  
+  <option value ="2">Saab</option>  
+  <option value="3">Opel</option>  
+	  <option value="4">Audi</option>  
+	</select>  
+
+	</td><td>栏目名称：</td><td><input type="text"></td><td>包含url</td><td><input type="text"></td></tr></table>
+	</div>
+
+
+    <div class="biaoge"  id="addword" style="min-width:600px;height:70px;display:none">添加栏目：<table><tr><td>搜索引擎 </td><td>
+     <select>  
+  <option value ="1">Volvo</option>  
+  <option value ="2">Saab</option>  
+  <option value="3">Opel</option>  
+	  <option value="4">Audi</option>  
+	</select>  
+
+	</td><td>栏目名称：</td><td>   <select>  
+  <option value ="1">Volvo</option>  
+  <option value ="2">Saab</option>  
+  <option value="3">Opel</option>  
+	  <option value="4">Audi</option>  
+	</select>  
+	</td><td>关键词</td><td><input type="text"></td></tr></table></div>
+
+    <div id = "tab" style="min-width:600px;height:600px">
+    <table class="table table-condensed">
+                    <thead>
+                              <tr>  <th>#</th>  <th>关键词</th><th>排名</th><th>指向URL地址</th><th>搜索引擎</th><th>检索日期</th></tr>  </thead>        <tbody>
+                            <tr class="active"> <td>1</td>  <td>人参</td> <td>1</td><td>www.kad360.com</td><td>百度</td><td>2014-06-19</td> </tr>  
+                              <tr class="success"> <td>2</td>   <td>萝卜</td>  <td>2</td> <td>www.kad360.com</td> <td>百度</td> <td>2014-06-19</td></tr>
+                              <tr class="danger">    <td>4</td>    <td>菜鸟</td>  <td>3</td>   <td>www.kad360.com</td> <td>百度</td> <td>2014-06-19</td></tr> 
+                               <tr >  <td class="success">5</td>      <td>二蛋</td>   <td>4</td><td>www.kad360.com</td><td>百度</td><td>2014-06-19</td></tr>
+                               </tbody>      </table>  </div>
+    </div>
+</div>
+</div>
+<div id="footer">版权所有</div>
+</div>   
+   		
+
+ 
+   </body>
+   
+</html>

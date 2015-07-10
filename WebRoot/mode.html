@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="datakad" content="yes"/>
+    <link href="css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+   <script src="./js/jquery-1.8.2.min.js"></script>
+    <script src="./js/hcharts/highcharts.js"></script>
+<script type="text/javascript">
+ var f = '1';
+  var ws = null;  
+  var data = null;
+$(function () {  
+   if ('WebSocket' in window)  
+        ws = new WebSocket("ws://192.168.8.154:8080/datakad/websocket.ws");  
+    else if ('MozWebSocket' in window)  
+       ws = new MozWebSocket("ws://ws://192.168.8.154:8080/datakad/websocket.ws");  
+    else  
+       alert("not support");  
+      
+      
+   ws.onmessage = function(evt) {  
+       //alert(evt.data); 
+       setdata(evt.data); 
+       //alert( document.getElementById("f1").innerHTML); 
+       var obj = JSON.parse(evt.data); 
+       document.getElementById("f1").innerHTML =  "<font color=#ED561B size =4><b>今日累计: </b> "+obj.f1+"元</font>";
+         document.getElementById("f2").innerHTML = "<font color=#50B432 size =4 ><b>作日累计: </b> "+ obj.f2+"元</font>";
+           document.getElementById("f3").innerHTML =  " <font color=#004B97 size =4><b>上周同日累计: </b>"+obj.f3+"元</font>";
+       //data = evt.data;
+   };  
+       ws.onerror = function() {  
+                               //连接失败  
+                        alert("连接错误");
+                 }  ;
+      
+    ws.onclose = function(evt) {  
+        alert("系统关闭");  
+    };  
+      
+    ws.onopen = function(evt) {  
+       alert("open");  
+       
+    };   	
+});  
+ 
+ function update(){
+ 
+ setInterval("sendMsg()",10000); 
+ //setInterval("skip()",20000); 
+ }
+function sendMsg() {  
+
+    ws.send("");  
+} 
+
+function setdata(data) {
+var obj = JSON.parse(data); 
+Highcharts.setOptions({ 
+    colors: ['#ED561B', '#50B432', '#004B97', '#24CBE5', '#64E572', '#FF9655', 
+'#FFF263', '#6AF9C4'] 
+}); 
+    $('#content1').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: obj.time
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            enabled: true,
+           /*  formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+this.x +': '+ this.y +'°C';
+            }, */
+             shared: true
+        },
+        plotOptions: {
+        spline: {
+                marker: {
+                    radius: 2,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            },
+        
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        
+        series: [{
+            name: '今天',
+            data: obj.count
+        }, {
+            name: '昨天',
+            data: obj.count2
+        }, {
+            name: '上周同日',
+            data: obj.count3
+        }],
+        credits:{
+        text:'',
+        href:''
+        }
+    });
+};
+</script>
+  </head>
+  <body onload="update()">
+    <div id="base" class="">
+		<div id="head" class="">
+        	<div id="headtitle">
+	        	<font color="#FFFFFF" size="5"><b>数据平台</b></font><br /> 
+            </div>
+        </div>
+      
+	  <div id="backg" class="">
+      	<div id="leftlist">
+        	<form>
+                <a class="sbutton"><font color="#000000"><b>第一时间</b></font></a>
+                <a href="#" class="button"><font color="#000000"><b>全站分析</b></font></a>
+                <a href="#" class="button"><font color="#000000"><b>科室分析</b></font></a>
+                <a href="#" class="button"><font color="#000000"><b>会员分析</b></font></a>
+                <a href="#" class="button"><font color="#000000"><b>疾病分析</b></font></a>
+                <a href="#" class="button"><font color="#000000"><b>搜索分析</b></font></a>
+            </form>
+        </div>
+        <div id="rightlist">
+        	<div id="righthead">
+                <div id="righttitle">
+                	<font size="4"><b>第一时间-概览</b></font><br /> 
+                </div>
+                <div id="rightbutton">
+                	<ul>
+                        <li>
+                        	<a href="#" class="r_sbutton"><font color="#000000"><b>概览</b></font></a>
+                        </li>
+                        <li>
+                        	<a href="#" class="r_button"><font color="#000000"><b>官网</b></font></a>
+                        </li>
+                        <li>
+                        	<a href="#" class="r_button"><font color="#000000"><b>WAP</b></font></a>
+                        </li>
+                        </ul>
+                </div>
+                
+                <div id="right1" ><!-- <p><b>今日累计</b></p><p id="price" align="center"></p>-->
+                	<div id="righthead1">
+                		<ul>
+                			<li>
+                				<div id="rightheadtitle">
+                					<p><b>全网销售额</b></p>
+                				</div>
+                			</li>
+                			<li>
+                				<div id="rightheadtitle">
+                					<p id="f1"><b>今日累计:</b></p>
+                				</div>
+                			</li>
+                			<li>
+                				<div id="rightheadtitle">
+                					<p id="f2"><b>昨日累计:</b></p>
+                				</div>
+                			</li>
+                			<li>
+                				<div id="rightheadtitle">
+                					<p id="f3"><b>上周同日累计:</b></p>
+                				</div>
+                			</li>
+                		</ul>
+                	</div>
+                	<div id="content1"></div>
+                </div>  
+                 <div id="right3">sdf</div>  
+                <div id="right4">sdf</div>
+            </div>
+     	</div>
+      </div>
+    </div>
+  </body>
+</html>

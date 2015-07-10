@@ -1,0 +1,294 @@
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+<style type="text/css"> 
+ 
+body{ margin:0px;text-align:center;background-color:#EBEBEB}
+#contner{ width:100%; margin:0px auto;}
+#header{ height:50px; background-color:#FF751A ;text-align:left;margin-bottom:10px}
+#leftnav{float:left; width:12%;border:1px;font-weight:bold;}
+#rightif{float:left; width:88%; border:0px solid #999966 ;background-color:#FFFFFF ;}
+#tab{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px }
+*{margin:0; padding:0}
+#condition{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB }
+#tubiao{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+#biaoge{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+
+#container{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF ;}
+#nav{ width:150px; margin:0px auto; text-align:right;}
+#nav h6{ cursor:pointer; line-height:50px; height:30px;margin-top:25px;font-weight:bolder;text-align:center}
+#nav a{display:block; line-height:24px;color:#666666;text-align:center; }
+#nav a:hover{background-color:#FAF3FA; color:#000;}
+#nav div{display:none; border-top:none}
+
+.icon-add
+{
+ background: url(img/a.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position: -16px -0px;
+}
+.icon-ad{
+ background: url(img/b.png) no-repeat;
+ width: 18px;
+ line-height: 18px;
+ background-position:-405px -95px;
+}
+  </style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>datakad棣栭〉</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <script>
+function show(id){
+	var next = id.nextElementSibling || src.nextSibling;
+	next.style.display = (next.style.display =="block")?"none":"block";
+	}
+
+  /*  function $(id){return document.getElementById(id)}
+window.onload = function(){
+$("nav").onclick = function(e){
+var src = e?e.target:event.srcElement;
+if(src.tagName == "H3"){
+var next = src.nextElementSibling || src.nextSibling;
+next.style.display = (next.style.display =="block")?"none":"block";
+}
+}
+}	 */
+
+  $(function () {
+    $('#container').highcharts({
+        title: {
+            text: 'channel keyword daily',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com',
+            x: -20
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (掳C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '掳C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Tokyo',
+            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+        }, {
+            name: 'New York',
+            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+        }, {
+            name: 'Berlin',
+            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+        }, {
+            name: 'London',
+            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+        }]
+    });
+});
+
+function getdata(){
+$.ajax({
+             type: "GET",
+             url: "AajaxServlet",
+             dataType: "json",
+             success: function(data){
+              createtab(data);
+             // setdata(data);
+                      }
+         });
+}
+
+function setdata(data){
+	  $('#container').highcharts({
+        title: {
+            text: 'channel keyword daily',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com',
+            x: -20
+        },
+        xAxis: {
+        	
+            categories: data.date,
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '掳C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.cpc,
+    });	
+	}
+	
+	function createtab(msg){
+	var data = "";
+		var r = msg.data;
+		
+	 data += '<table border=1 width =100%><tbody>';
+        for (var i = 0; i < r.length; i++) {
+        var c = r[i];
+       if(i%2==0){
+       		data += '<tr bgcolor=#F5F5F5 height=30px>';
+       }else{
+       		data += '<tr bgcolor=#FCF8E3 height=30px>';
+       }
+         
+         for (var j = 0; j < c.length; j++) {
+          data += '<td>' + c[j] +'</td>';
+         }
+         data += '</tr>';
+        }
+        data += '</tbody><table>';
+         document.getElementById('tab').innerHTML = data;
+    	}
+  </script>
+  
+ <body>
+
+<div id="contner">
+<div id="header"><h3 style="margin-left:4%;color:#FFFFFF" onclick="getdata()"><img src="img/logo.gif"  /> &nbsp; &nbsp;&nbsp;kad数据分析平台</h3>
+</div>
+<div id="mian">
+<div id="leftnav">
+<div id="nav">
+<h6 onclick = show(this)>商品访问实时监控</h6>
+<div>
+<a href="http://www.baidu.com" target="ife">鍛靛懙</a>
+<a href="#">222</a>
+<a href="#">333</a> </div>
+<hr>
+<h6 onclick = show(this)>栏目访问实时监控</h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = show(this)>url实时监控</h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = show(this)>实时监控</h6>
+<div>
+<a href="#">aaa</a>
+<a href="#">bbb</a>
+<a href="#">ccc</a>
+</div>
+<hr>
+<h6 onclick = show(this)>实时监控</h6>
+<div>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+</div>
+<hr>
+<h6 onclick = show(this)>实时监控</h6>
+<div>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+<a href="#">Primary</a>
+</div>
+<hr>
+</div>
+</div><!--杩欓儴鍒嗘槸宸︿晶瀵艰埅-->
+<div id="rightif">
+<div align="center">
+	<div id ="condition" style="min-width:600px;height:30px">姝ラ暱: &nbsp;&nbsp;<input type ="text" id = "size">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 鏃堕棿 :&nbsp;&nbsp; <span id="datetimepicker" class="input-append date">
+      <input type="text"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </span>&nbsp;&nbsp;&nbsp;
+    <button onclick="getdata()" class ="btn btn-small btn-success" type ="button" >鐢熸垚琛ㄦ牸</button>
+    </div>
+    <div id="tubiao" style="min-width:600px;height:30px">鍥捐〃</div>
+    <div id="container" style="min-width:600px;height:400px"></div>
+    <div id = "biaoge" style="min-width:600px;height:30px">琛ㄦ牸</div>
+    <div id = "tab" style="min-width:600px;height:600px">
+    <table class="table table-condensed">
+            <caption>Table</caption>
+                    <thead>
+                              <tr>  <th>#</th>  <th>First Name</th><th>Last Name</th><th>User Name</th></tr>  </thead>        <tbody>
+                            <tr class="active"> <td>1</td>  <td>aehyok</td> <td>leo</td><td>@aehyok</td> </tr>  
+                              <tr class="success"> <td>2</td>   <td>lynn</td>  <td>thl</td> <td>@lynn</td>  </tr>
+                              <tr class="warning">   <td>3</td>  <td>Amdy</td>   <td>Amy</td>   <td>@Amdy</td> </tr>
+                              <tr class="danger">    <td>4</td>    <td>Amdy</td>  <td>Amy</td>   <td>@Amdy</td>  </tr> 
+                               <tr >  <td class="success">5</td>      <td>Amdy</td>   <td>Amy</td><td">@Amdy</td></tr>
+                               </tbody>      </table>  </div>
+    </div>
+</div>
+</div>
+<div id="footer">鐗堟潈鎵�湁</div>
+</div>   
+   		
+
+ 
+   </body>
+   
+    <script>
+ $('#datetimepicker').datetimepicker({
+        format: 'MM/dd/yyyy hh:mm',
+        language: 'en',
+        pickDate: true,
+        pickTime: true,
+        hourStep: 1,
+        minuteStep: 15,
+        secondStep: 30,
+        inputMask: true
+      });
+   </script>
+</html>

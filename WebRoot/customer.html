@@ -1,0 +1,297 @@
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/hcharts/highcharts.js"></script>
+<script src="./js/Bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/Bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="./js/jquery.mobile.min.js"></script>
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./js/Bootstrap/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="./css/jquery.mobile.min.css">
+<link href="./js/Bootstrap/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+<style type="text/css"> 
+ 
+body{ margin:0px;text-align:center;background-color:#EBEBEB}
+#contner{ width:100%; margin:0px auto;}
+#header{ height:50px; background-color:#FF751A ;text-align:left;margin-bottom:10px}
+#leftnav{float:left; width:12%;border:1px;font-weight:bold;}
+#rightif{float:left; width:88%; border:0px solid #999966 ;background-color:#FFFFFF ;}
+#tab{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px }
+*{margin:0; padding:0}
+#condition{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB }
+#tubiao{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+#biaoge{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF;margin-top:10px;margin-bottom:10px;background-color:#EBEBEB;text-align:left;font-weight:bolder }
+
+#container{margin-left:30px;margin-right:30px;border:1px solid #E8DFDF ;}
+#nav{ width:150px; margin:0px auto; text-align:right;}
+#nav h6{ cursor:pointer; line-height:50px; height:30px;margin-top:25px;font-weight:bolder;text-align:center; color:#615454}
+#nav a{display:block; line-height:24px;color:#666666;text-align:center; }
+#nav a:hover{background-color:#FAF3FA; color:#000;}
+#nav div{display:none; border-top:none}
+
+  </style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+   
+    
+    <title>datakad棣栭〉</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <script>
+  var f = '1';
+  var ws = null;  
+  var data = null;
+$(function () {  
+   if ('WebSocket' in window)  
+        ws = new WebSocket("ws://127.0.0.1:8080/datakad/websocket.ws");  
+    else if ('MozWebSocket' in window)  
+       ws = new MozWebSocket("ws://127.0.0.1:8080/datakad/websocket.ws");  
+    else  
+       alert("not support");  
+      
+      
+   ws.onmessage = function(evt) {  
+       //alert(evt.data); 
+       //setdata(evt.data); 
+       data = evt.data;
+   };  
+       ws.onerror = function() {  
+                               //连接失败  
+                        alert("连接错误");
+                 }  ;
+      
+    ws.onclose = function(evt) {  
+        alert("系统关闭");  
+    };  
+      
+    ws.onopen = function(evt) {  
+      // alert("open");  
+       
+    };   	
+});  
+ 
+ function update(){
+ 
+ setInterval("sendMsg()",50000); 
+ setInterval("skip()",20000); 
+ }
+function sendMsg() {  
+//alert("aa");
+    ws.send("");  
+} 
+function skip(){
+setdata(data); 
+var type =f;
+if(type=='1'){
+var d=document.getElementById('skip1');
+f='2';
+ d.click();
+}
+if(type=='2'){
+var d=document.getElementById('skip2');
+f='3';
+ d.click();
+}
+if(type=='3'){
+var d=document.getElementById('skip3');
+f='1';
+ d.click();
+}
+} 
+ function setdata(data) {   
+ var obj = JSON.parse(data);   
+// alert(obj);                
+    Highcharts.setOptions({
+        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+    });                                           
+    $('#container').highcharts({                                           
+        chart: {                                                           
+            type: 'bar'                                                    
+        },                                                                 
+        title: {                                                           
+            text: '售前药师销售金额排名'                    
+        },                                                                 
+        subtitle: {                                                        
+            text: ''                                  
+        },                                                                 
+        xAxis: {                                                           
+            categories: obj.name,
+            title: {                                                       
+                text: null                                                 
+            }                                                              
+        },                                                                 
+        yAxis: {                                                           
+            min: 0,                                                        
+            title: {                                                       
+                text: '单位 (元)',                             
+                align: 'high'                                              
+            },                                                             
+            labels: {                                                      
+                overflow: 'justify'                                        
+            }                                                              
+        },                                                                 
+        tooltip: {                                                         
+            valueSuffix: ' millions'                                       
+        },                                                                 
+        plotOptions: {                                                     
+            bar: {                                                         
+                dataLabels: {                                              
+                    enabled: true                                          
+                }                                                          
+            }                                                              
+        },                                                                 
+        legend: {                                                          
+            layout: 'vertical',                                            
+            align: 'right',                                                
+            verticalAlign: 'top',                                          
+            x: -40,                                                        
+            y: 100,                                                        
+            floating: true,                                                
+            borderWidth: 1,                                                
+            backgroundColor: '#FFFFFF',                                    
+            shadow: true                                                   
+        },                                                                 
+        credits: {                                                         
+            enabled: false                                                 
+        },                                                                 
+        series: [{                                                         
+            name: '今日目标金额',                                             
+            data: obj.target                                  
+        },{                                                         
+            name: '今日销售金额',                                             
+            data: obj.sale                                  
+        }]                                                                 
+    });  
+    
+     $('#container2').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '售前药师销售完成百分比排名'
+        },
+        xAxis: {
+            categories: obj.name,
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total fruit consumption'
+            }
+        },
+        legend: {
+            backgroundColor: '#FFFFFF',
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+            series: [{
+            name: '未完成',
+            data: obj.rate2
+        }, {
+            name: '完成进度',
+            data: obj.rate
+        }]
+    });               
+    
+       $('#container3').highcharts({                                           
+        chart: {                                                           
+            type: 'bar'                                                    
+        },                                                                 
+        title: {                                                           
+            text: '售前药师销售完成百分比排名'                    
+        },                                                                 
+        subtitle: {                                                        
+            text: ''                                  
+        },                                                                 
+        xAxis: {                                                           
+            categories: obj.name,
+            title: {                                                       
+                text: null                                                 
+            }                                                              
+        },                                                                 
+        yAxis: {                                                           
+            min: 0,                                                        
+            title: {                                                       
+                text: '单位 (%)',                             
+                align: 'high'                                              
+            },                                                             
+            labels: {                                                      
+                overflow: 'justify'                                        
+            }                                                              
+        },                                                                 
+        tooltip: {                                                         
+            valueSuffix: ' millions'                                       
+        },                                                                 
+        plotOptions: {                                                     
+            bar: {                                                         
+                dataLabels: {                                              
+                    enabled: true                                          
+                }                                                          
+            }                                                              
+        },                                                                 
+        legend: {                                                          
+            layout: 'vertical',                                            
+            align: 'right',                                                
+            verticalAlign: 'top',                                          
+            x: -40,                                                        
+            y: 100,                                                        
+            floating: true,                                                
+            borderWidth: 1,                                                
+            backgroundColor: '#FFFFFF',                                    
+            shadow: true                                                   
+        },                                                                 
+        credits: {                                                         
+            enabled: false                                                 
+        },                                                                 
+        series: [{                                                         
+            name: '销售完成度',                                             
+            data: obj.rate                                 
+        }]                                                                 
+    });                                               
+};     
+
+                      
+  </script>
+  
+ <body onload=update()>
+<div data-role="page" id="pageone">
+<a id="skip1" href="#pagetwo" data-transition="slide"></a>
+<div id="container" style="width:97%;height:100%;"></div>
+</div>
+
+<div data-role="page" id="pagetwo">
+ <a href="#pagethree" id="skip2" data-transition="slide"></a>
+<div  id="container2" style="width:97%;height:100%;"> </div>
+</div>
+
+<div data-role="page" id="pagethree">
+ <a href="#pageone" id="skip3" data-transition="slide"></a>
+<div  id="container3" style="width:97%;height:100%;"> </div>
+</div>
+   </body>
+   
+    <script>
+ $('#datetimepicker').datetimepicker({
+        format: 'MM/dd/yyyy hh:mm',
+        language: 'en',
+        pickDate: true,
+        pickTime: true,
+        hourStep: 1,
+        minuteStep: 15,
+        secondStep: 30,
+        inputMask: true
+      });
+   </script>
+</html>
